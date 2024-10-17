@@ -5,6 +5,7 @@ import AuthLayout from "./components/layout/AuthLayout";
 import LoginPage from "./components/auth/LoginPage";
 import RegisterPage from "./components/auth/RegisterPage";
 import Posts from "./components/posts/Posts";
+import UpdateRole from "./components/auth/UpdateRole";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
     children: [
       { path: "login", element: <LoginPage /> },
       { path: "register", element: <RegisterPage /> },
+      { path: "update-role", element: <UpdateRole /> },
     ],
   },
 ]);

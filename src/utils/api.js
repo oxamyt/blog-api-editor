@@ -42,3 +42,16 @@ export async function getPostsRequest(url, token) {
   if (!response.ok) throw new Error("Please Login First");
   return await response.json();
 }
+
+export async function postUserRequest(token) {
+  const response = await fetch(`${API_URL}/auth/get-user`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) {
+    throw new Error("Failed to get user. Please try again.");
+  }
+  return await response.json();
+}

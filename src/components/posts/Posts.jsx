@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getPostsRequest } from "../../utils/api";
+import { getPostsRequest, postUserRequest } from "../../utils/api";
 import ErrorMessage from "../common/ErrorMessage";
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -9,12 +9,31 @@ function Posts() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const checkUser = async () => {
+    const token = localStorage.getItem("token");
+
+    try {
+      const responseData = await postUserRequest(token);
+
+      if (responseData.user.role !== "ADMIN") {
+        setError("You are not an admin.");
+        setLoading(false);
+        return;
+      }
+
+      fetchPosts();
+    } catch (error) {
+      console.log("Error in checkUser:", error);
+      setError(error.message);
+      setLoading(false);
+    }
+  };
+
   const fetchPosts = async () => {
     const token = localStorage.getItem("token");
 
     try {
       const responseData = await getPostsRequest(`${API_URL}/posts`, token);
-
       setResponseData(responseData);
       setError(null);
     } catch (error) {
@@ -25,7 +44,7 @@ function Posts() {
   };
 
   useEffect(() => {
-    fetchPosts();
+    checkUser();
   }, []);
 
   const renderPosts = () => {
@@ -54,9 +73,11 @@ function Posts() {
       ) : (
         <>
           <ErrorMessage message={error} />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
-            {renderPosts()}
-          </div>
+          {!error && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+              {renderPosts()}
+            </div>
+          )}
         </>
       )}
     </div>
