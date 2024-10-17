@@ -25,6 +25,7 @@ function LoginPage() {
       setPassword("");
       localStorage.setItem("token", responseData.token);
       localStorage.setItem("userId", responseData.user.id);
+      localStorage.setItem("username", responseData.user.username);
       navigate("/");
     } catch (error) {
       setError(error.message);

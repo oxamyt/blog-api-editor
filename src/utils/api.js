@@ -22,3 +22,12 @@ export async function postRequest(url, data) {
   }
   return await response.json();
 }
+
+export async function postRequestLogout() {
+  const response = await fetch(`${API_URL}/auth/logout`, {
+    method: "POST",
+  });
+  if (!response.ok) {
+    throw new Error("Failed to logout. Please try again.");
+  }
+}
