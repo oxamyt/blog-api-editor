@@ -4,12 +4,16 @@ import Homepage from "./components/layout/Homepage";
 import AuthLayout from "./components/layout/AuthLayout";
 import LoginPage from "./components/auth/LoginPage";
 import RegisterPage from "./components/auth/RegisterPage";
+import Posts from "./components/posts/Posts";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    children: [{ index: true, element: <Homepage /> }],
+    children: [
+      { index: true, element: <Homepage /> },
+      { path: "posts", element: <Posts /> },
+    ],
   },
   {
     path: "/auth",

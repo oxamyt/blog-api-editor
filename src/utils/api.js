@@ -31,3 +31,14 @@ export async function postRequestLogout() {
     throw new Error("Failed to logout. Please try again.");
   }
 }
+
+export async function getPostsRequest(url, token) {
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) throw new Error("Please Login First");
+  return await response.json();
+}
