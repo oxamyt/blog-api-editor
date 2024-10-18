@@ -21,6 +21,9 @@ function Navbar() {
         <Link to="/auth/login" className="text-gray-600">
           Login
         </Link>
+        <Link to="/auth/update-role" className="text-gray-600">
+          Update Role
+        </Link>
       </div>
       <LogoutButton setError={setError} />
       {error && <ErrorMessage message={error} />}
