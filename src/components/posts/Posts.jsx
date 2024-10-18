@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getPostsRequest, postUserRequest } from "../../utils/api";
 import ErrorMessage from "../common/ErrorMessage";
+import ChangePublishedStateButton from "../common/ChangePublishedStateButton";
 const API_URL = import.meta.env.VITE_API_URL;
 
 function Posts() {
@@ -47,22 +48,41 @@ function Posts() {
     checkUser();
   }, []);
 
+  const updatePostState = (postId) => {
+    setResponseData((prevPosts) =>
+      prevPosts.map((post) =>
+        post.id === postId ? { ...post, isPublished: !post.isPublished } : post
+      )
+    );
+  };
+
   const renderPosts = () => {
     if (responseData.length === 0 && error === null) {
       return <p className="text-gray-600">No posts available.</p>;
     }
 
     return responseData.map((post) => (
-      <Link
+      <div
         key={post.id}
-        to={`/posts/${post.id}`}
         className="block bg-white shadow-lg rounded-lg p-6 mb-4 transition-transform transform hover:scale-105"
       >
         <h1 className="text-gray-600 font-bold md:text-4xl sm:text-2xl mb-4">
           {post.title}
         </h1>
-        <span className="text-l text-gray-500">Edit Inside →</span>
-      </Link>
+        {post.isPublished ? (
+          <h1 className="text-green-500">Published</h1>
+        ) : (
+          <h1 className="text-red-500">Not Published</h1>
+        )}
+        <ChangePublishedStateButton
+          state={post.isPublished ? "Unpublished" : "Published"}
+          postId={post.id}
+          refreshPosts={() => updatePostState(post.id)}
+        />
+        <Link to={`/posts/${post.id}`}>
+          <h1 className="text-l text-gray-500">Edit Inside →</h1>
+        </Link>
+      </div>
     ));
   };
 

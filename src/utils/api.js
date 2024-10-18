@@ -78,3 +78,14 @@ export async function postUserRequest(token) {
   }
   return await response.json();
 }
+
+export async function patchRequestUpdatePublishedState(token, postId) {
+  const response = await fetch(`${API_URL}/posts/${postId}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) throw new Error("Problem changing published state");
+  return await response.json();
+}
