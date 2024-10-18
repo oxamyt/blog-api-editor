@@ -6,6 +6,7 @@ import LoginPage from "./components/auth/LoginPage";
 import RegisterPage from "./components/auth/RegisterPage";
 import Posts from "./components/posts/Posts";
 import UpdateRole from "./components/auth/UpdateRole";
+import EditSinglePost from "./components/posts/EditSinglePost";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Homepage /> },
       { path: "posts", element: <Posts /> },
+      { path: "/posts/:id", element: <EditSinglePost /> },
     ],
   },
   {

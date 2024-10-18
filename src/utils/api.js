@@ -55,6 +55,17 @@ export async function postRequestUpdateRole(data, token) {
   return await response.json();
 }
 
+export async function getSinglePostRequest(id, token) {
+  const response = await fetch(`${API_URL}/posts/${id}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return await response.json();
+}
+
 export async function getPostsRequest(url, token) {
   const response = await fetch(url, {
     method: "GET",
@@ -87,5 +98,23 @@ export async function patchRequestUpdatePublishedState(token, postId) {
     },
   });
   if (!response.ok) throw new Error("Problem changing published state");
+  return await response.json();
+}
+
+export async function putRequestUpdatePublishedState(postId, data, token) {
+  console.log("Updated Post Data:", data);
+  const response = await fetch(`${API_URL}/posts/${postId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  });
+  if (!response.ok) {
+    const errorDetails = await response.json();
+    console.error("Error details:", errorDetails);
+    throw new Error("Problem editing post");
+  }
   return await response.json();
 }
