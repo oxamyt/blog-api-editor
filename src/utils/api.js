@@ -118,3 +118,20 @@ export async function putRequestUpdatePublishedState(postId, data, token) {
   }
   return await response.json();
 }
+
+export async function postRequestCreatePost(data, token) {
+  const response = await fetch(`${API_URL}/posts/`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  });
+  if (!response.ok) {
+    const errorDetails = await response.json();
+    console.error("Error details:", errorDetails);
+    throw new Error("Problem creating post");
+  }
+  return await response.json();
+}

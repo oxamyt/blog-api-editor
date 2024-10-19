@@ -10,6 +10,7 @@ function FormInput({ label, type, value, onChange, id }) {
         {label}
       </label>
       <input
+        minLength="3"
         type={type}
         id={id}
         value={value}
