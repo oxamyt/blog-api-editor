@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import ErrorMessage from "../common/ErrorMessage";
+import FormInput from "../common/FormInput";
 
 function EditSinglePost() {
   const { id } = useParams();

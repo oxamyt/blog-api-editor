@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import { getPostsRequest, postUserRequest } from "../../utils/api";
 import ErrorMessage from "../common/ErrorMessage";
 import ChangePublishedStateButton from "../common/ChangePublishedStateButton";
+import DeletePostButton from "../common/DeletePostButton";
+import { FaEdit } from "react-icons/fa"; // Example icon
+
 const API_URL = import.meta.env.VITE_API_URL;
 
 function Posts() {
@@ -79,9 +82,14 @@ function Posts() {
           postId={post.id}
           refreshPosts={() => updatePostState(post.id)}
         />
-        <Link to={`/posts/${post.id}`}>
-          <h1 className="text-l text-gray-500">Edit Inside →</h1>
+        <Link
+          to={`/posts/${post.id}`}
+          className="flex items-center mt-4 text-gray-500 hover:text-gray-800 transition-colors"
+        >
+          <FaEdit className="mr-1 w-5 h-5" /> {/* Icon with a size */}
+          Edit
         </Link>
+        <DeletePostButton postId={post.id} refreshPosts={fetchPosts} />
       </div>
     ));
   };

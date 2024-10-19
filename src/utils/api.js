@@ -102,7 +102,6 @@ export async function patchRequestUpdatePublishedState(token, postId) {
 }
 
 export async function putRequestUpdatePublishedState(postId, data, token) {
-  console.log("Updated Post Data:", data);
   const response = await fetch(`${API_URL}/posts/${postId}`, {
     method: "PUT",
     headers: {
@@ -132,6 +131,21 @@ export async function postRequestCreatePost(data, token) {
     const errorDetails = await response.json();
     console.error("Error details:", errorDetails);
     throw new Error("Problem creating post");
+  }
+  return await response.json();
+}
+
+export async function deleteRequestPost(postId, token) {
+  const response = await fetch(`${API_URL}/posts/${postId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) {
+    const errorDetails = await response.json();
+    console.error("Error details:", errorDetails);
+    throw new Error("Problem editing post");
   }
   return await response.json();
 }
