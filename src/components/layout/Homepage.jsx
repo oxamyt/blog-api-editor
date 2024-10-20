@@ -15,7 +15,7 @@ function Homepage() {
               Welcome back, <span className="font-semibold">{username}</span>!
             </h2>
             <button className="mt-6 p-2 m-2 text-white border-2 border-transparent bg-stone-900 font-bold py-2 rounded-lg hover:bg-stone-100 hover:border-2 hover:border-black hover:text-black transition duration-300">
-              <Link to="/auth/login">Get into admin panel</Link>
+              <Link to="/posts/">Get into admin panel</Link>
             </button>
           </>
         ) : (
