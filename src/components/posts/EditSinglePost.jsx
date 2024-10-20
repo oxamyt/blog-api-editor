@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FaEdit } from "react-icons/fa";
 import ErrorMessage from "../common/ErrorMessage";
-import FormInput from "../common/FormInput";
+import DeleteComment from "../common/deleteComment";
 
 function EditSinglePost() {
   const { id } = useParams();
@@ -124,7 +124,28 @@ function EditSinglePost() {
                 key={comment.id}
                 className="p-4 bg-gray-100 rounded-md shadow-sm"
               >
-                <h1>{comment.content}</h1>
+                <div>
+                  <p className="text-gray-800 text-xl">{comment.content}</p>
+                  <p className="text-s text-gray-500">
+                    By:{" "}
+                    <span className="font-semibold">
+                      {comment.author.username}
+                    </span>
+                  </p>
+                  <p className="text-xs text-gray-400">
+                    Created at: {new Date(comment.createdAt).toLocaleString()}
+                  </p>
+                  <p className="text-xs text-gray-400">
+                    Last Updated at:{" "}
+                    {new Date(comment.updatedAt).toLocaleString()}
+                  </p>
+
+                  <DeleteComment
+                    id={id}
+                    commentId={comment.id}
+                    onCommentDeleted={fetchSinglePost}
+                  />
+                </div>
               </li>
             ))}
           </ul>

@@ -149,3 +149,24 @@ export async function deleteRequestPost(postId, token) {
   }
   return await response.json();
 }
+
+export async function deleteRequestComment(id, commentId, token) {
+  const response = await fetch(`${API_URL}/posts/${id}/comments/${commentId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  if (!response.ok) {
+    const errorMessage = await response.text();
+    throw new Error(
+      errorMessage || "Failed to delete comment. Please try again."
+    );
+  }
+
+  if (response.status === 204) {
+    return { success: true };
+  }
+
+  return await response.json();
+}
