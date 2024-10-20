@@ -25,8 +25,6 @@ function CreatePost() {
 
       setSuccess(true);
       setTimeout(() => setSuccess(false), 3000);
-
-      console.log(responseData);
     } catch (error) {
       setError(error.message);
     }

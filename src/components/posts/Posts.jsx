@@ -27,7 +27,7 @@ function Posts() {
 
       fetchPosts();
     } catch (error) {
-      console.log("Error in checkUser:", error);
+      console.error("Error in checkUser:", error);
       setError(error.message);
       setLoading(false);
     }
