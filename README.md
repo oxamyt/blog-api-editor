@@ -21,3 +21,4 @@ This project leverages modern web technologies for a powerful and seamless editi
 - **Publishing Control**: Toggle posts between published and unpublished states.
 - **Authentication**: Secure access to post-editing features with role-based access.
 - **Responsive Design**: Optimized for both mobile and desktop layouts using Tailwind CSS.
+- **Live**: https://oxamyt-blog-editor.netlify.app/ .
